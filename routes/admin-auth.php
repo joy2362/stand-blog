@@ -8,11 +8,30 @@ use App\Http\Controllers\Admin\NewPasswordController;
 use App\Http\Controllers\Admin\PasswordResetLinkController;
 use App\Http\Controllers\Admin\RegisterUserController;
 use App\Http\Controllers\Admin\VerifyEmailController;
+use App\Http\Controllers\Admin\categoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function () {
 
 
+
+    Route::get('/home', function () {
+        return view('admin.panel.index');
+    })->middleware(['auth:admin'])->name('admin.home');
+
+    Route::get('/profile',function(){
+       return view('admin.panel.profile');
+    })->middleware(['auth:admin'])->name('admin.profile');
+
+
+
+
+    //category
+    Route::get('/category', [categoryController::class, 'index'])->name('admin.category');
+    Route::post('/category/add', [categoryController::class, 'store']);
+
+
+    //auth
 Route::get('/register', [RegisterUserController::class, 'create'])
     ->middleware('guest')
     ->name('admin.register');
