@@ -209,20 +209,114 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 <!-- Library for adding dinamically elements -->
 <script src="{{asset("backend/assets/js/plugins/arrive.min.js")}}"></script>
-<!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 <!-- Chartist JS -->
 <script src="{{asset("backend/assets/js/plugins/chartist.min.js")}}"></script>
 <!--  Notifications Plugin    -->
 <script src="{{asset("backend/assets/js/plugins/bootstrap-notify.js")}}"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{asset('backend/assets/js/material-dashboard.js?v=2.1.2')}}" type="text/javascript"></script>
-
+<!-- sweet alert 2
+-->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js
         md.initDashboardPageCharts();
+
+    });
+</script>
+<script>
+    @if(Session::has('messege'))
+    var type="{{Session::get('alert-type','info')}}"
+    switch(type){
+        case 'info':
+            $.notify({
+                message: "{{ Session::get('messege') }}"
+            },{
+                type: 'info',
+                timer: 2000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            break;
+        case 'success':
+            $.notify({
+                message: "{{ Session::get('messege') }}"
+            },{
+                type: 'success',
+                timer: 2000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            break;
+        case 'warning':
+            $.notify({
+                message: "{{ Session::get('messege') }}"
+            },{
+                type: 'warning',
+                timer: 2000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            break;
+        case 'error':
+            $.notify({
+                message: "{{ Session::get('messege') }}"
+            },{
+                type: 'danger',
+                timer: 2000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            break;
+    }
+    @endif
+</script>
+<script>
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+
+            $.notify({
+                message: "{{ $error }}"
+            },{
+                type: 'danger',
+                timer: 2000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+        @endforeach
+    @endif
+
+</script>
+<script>
+
+    $(document).on("click", "#delete", function(e){
+        e.preventDefault();
+        var link = $(this).attr("href");
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = link;
+            }
+        })
 
     });
 </script>

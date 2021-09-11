@@ -28,7 +28,11 @@ Route::prefix('admin')->group(function () {
 
     //category
     Route::get('/category', [categoryController::class, 'index'])->name('admin.category');
+    Route::get('/category/delete/{id}', [categoryController::class, 'destroy']);
+    Route::get('/category/edit/{id}', [categoryController::class, 'edit']);
+    Route::get('/category/create', [categoryController::class, 'create']);
     Route::post('/category/add', [categoryController::class, 'store']);
+    Route::post('/category/update/{id}', [categoryController::class, 'update']);
 
 
     //auth
