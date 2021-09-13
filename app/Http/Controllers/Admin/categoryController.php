@@ -77,7 +77,7 @@ class categoryController extends Controller
             'name' => 'required |max:55|min:3',
             'slug' => 'required'
         ]);
-     
+
         $category  = category::where('id' , $id )->first();
         $category->name =  $request->name;
         $category->slug = $request->slug;

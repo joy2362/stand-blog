@@ -23,25 +23,32 @@
 
 <body class="">
 <div class="wrapper ">
-    <div class="sidebar" data-color="danger" data-background-color="white" data-image="{{asset('backend/assets/img/sidebar-1.jpg')}}">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="{{asset('backend/assets/img/sidebar-1.jpg')}}">
 
         <div class="logo"><a href="{{route('index')}}" class="simple-text logo-normal">
                 Simple Blog
             </a></div>
         <div class="sidebar-wrapper">
             <ul class="nav">
-                <li class="nav-item active  ">
+                <li class="nav-item {{ (request()->is('admin/home*')) ? 'active' : '' }}"  >
                     <a class="nav-link" href="{{url('/admin/home')}}" >
                         <i class="material-icons">dashboard</i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-item ">
+                <li class="nav-item  {{ (request()->is('admin/access*')) ? 'active' : '' }} ">
+                    <a class="nav-link " href="{{url('/admin/access/all')}}">
+                        <i class="material-icons">people</i>
+                        <p>Admins</p>
+                    </a>
+                </li>
+                <li class="nav-item {{ (request()->is('admin/category*')) ? 'active' : '' }} ">
                     <a class="nav-link" href="{{route('admin.category')}}">
                         <i class="material-icons">Category</i>
                         <p>Category</p>
                     </a>
                 </li>
+
                 <li class="nav-item ">
                     <a class="nav-link" href="./tables.html">
                         <i class="material-icons">content_paste</i>
@@ -54,12 +61,7 @@
                         <p>Typography</p>
                     </a>
                 </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="./icons.html">
-                        <i class="material-icons">bubble_chart</i>
-                        <p>Icons</p>
-                    </a>
-                </li>
+
                 <li class="nav-item ">
                     <a class="nav-link" href="./map.html">
                         <i class="material-icons">location_ons</i>
@@ -184,7 +186,7 @@
 <!-- Plugin for the momentJs  -->
 <script src="{{asset('backend/assets/js/plugins/moment.min.js')}}"></script>
 <!--  Plugin for Sweet Alert -->
-<script src="{{asset('backend/assets/js/plugins/sweetalert2.js')}}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Forms Validations Plugin -->
 <script src="{{asset('backend/assets/js/plugins/jquery.validate.min.js')}}"></script>
 <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
@@ -215,9 +217,6 @@
 <script src="{{asset("backend/assets/js/plugins/bootstrap-notify.js")}}"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{asset('backend/assets/js/material-dashboard.js?v=2.1.2')}}" type="text/javascript"></script>
-<!-- sweet alert 2
--->
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     $(document).ready(function() {
@@ -307,7 +306,7 @@
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
-            icon: 'warning',
+            type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',

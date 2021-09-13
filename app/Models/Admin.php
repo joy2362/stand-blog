@@ -41,4 +41,9 @@ class Admin extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function access(){
+        return $this->hasOne(AdminPermission::class, 'name');
+    }
+
+
 }
