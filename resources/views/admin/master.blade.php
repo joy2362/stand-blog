@@ -2,19 +2,22 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>
-       Simple Blog | Admin
+        Simple Blog | Admin
     </title>
-    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport'/>
     <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
-    <link href="{{asset('backend/assets/css/material-dashboard.css?v=2.1.2')}}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <link href="{{asset('backend/assets/css/material-dashboard.css?v=2.1.2')}}" rel="stylesheet"/>
     <style>
-        .active .nav-link{
+        .active .nav-link {
             background: #0b75c9;
         }
     </style>
@@ -23,15 +26,16 @@
 
 <body class="">
 <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="{{asset('backend/assets/img/sidebar-1.jpg')}}">
+    <div class="sidebar" data-color="purple" data-background-color="white"
+         data-image="{{asset('backend/assets/img/sidebar-1.jpg')}}">
 
         <div class="logo"><a href="{{route('index')}}" class="simple-text logo-normal">
                 Simple Blog
             </a></div>
         <div class="sidebar-wrapper">
             <ul class="nav">
-                <li class="nav-item {{ (request()->is('admin/home*')) ? 'active' : '' }}"  >
-                    <a class="nav-link" href="{{url('/admin/home')}}" >
+                <li class="nav-item {{ (request()->is('admin/home*')) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{url('/admin/home')}}">
                         <i class="material-icons">dashboard</i>
                         <p>Dashboard</p>
                     </a>
@@ -50,42 +54,12 @@
                 </li>
 
                 <li class="nav-item ">
-                    <a class="nav-link" href="./tables.html">
+                    <a class="nav-link" href="{{route('admin.blog')}}">
                         <i class="material-icons">content_paste</i>
-                        <p>Table List</p>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="./typography.html">
-                        <i class="material-icons">library_books</i>
-                        <p>Typography</p>
+                        <p>Blogs</p>
                     </a>
                 </li>
 
-                <li class="nav-item ">
-                    <a class="nav-link" href="./map.html">
-                        <i class="material-icons">location_ons</i>
-                        <p>Maps</p>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="./notifications.html">
-                        <i class="material-icons">notifications</i>
-                        <p>Notifications</p>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="./rtl.html">
-                        <i class="material-icons">language</i>
-                        <p>RTL Support</p>
-                    </a>
-                </li>
-                <li class="nav-item active-pro ">
-                    <a class="nav-link" href="./upgrade.html">
-                        <i class="material-icons">unarchive</i>
-                        <p>Upgrade to PRO</p>
-                    </a>
-                </li>
             </ul>
         </div>
     </div>
@@ -96,7 +70,8 @@
                 <div class="navbar-wrapper">
                     <a class="navbar-brand" href="{{url('/admin/home')}}">Dashboard</a>
                 </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="navbar-toggler-icon icon-bar"></span>
                     <span class="navbar-toggler-icon icon-bar"></span>
@@ -115,7 +90,8 @@
                     <ul class="navbar-nav">
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link" href="" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
                                 <i class="material-icons">notifications</i>
                                 <span class="notification">5</span>
                                 <p class="d-lg-none d-md-block">
@@ -131,14 +107,15 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link" href="javascript:" id="navbarDropdownProfile" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
                                 <i class="material-icons">person</i>
                                 <p class="d-lg-none d-md-block">
                                     Account
                                 </p>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                                <h4 class="dropdown-item" >{{Auth::guard('admin')->user()->name}}</h4>
+                                <h4 class="dropdown-item">{{Auth::guard('admin')->user()->name}}</h4>
                                 <a class="dropdown-item" href="{{route('admin.profile')}}">Profile</a>
                                 <a class="dropdown-item" href="#">Settings</a>
                                 <div class="dropdown-divider"></div>
@@ -160,7 +137,7 @@
         <!-- End Navbar -->
         <div class="content">
             <div class="container-fluid">
-               @yield('content')
+                @yield('content')
             </div>
         </div>
         <footer class="footer">
@@ -170,7 +147,8 @@
                     &copy;
                     <script>
                         document.write(new Date().getFullYear())
-                    </script>, made with <i class="material-icons">favorite</i> by
+                    </script>
+                    , made with <i class="material-icons">favorite</i> by
                     <a href="#" target="_blank">Abdullah Zahid</a>
                 </div>
             </div>
@@ -217,9 +195,9 @@
 <script src="{{asset("backend/assets/js/plugins/bootstrap-notify.js")}}"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{asset('backend/assets/js/material-dashboard.js?v=2.1.2')}}" type="text/javascript"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Javascript method's body can be found in assets/js/demos.js
         md.initDashboardPageCharts();
 
@@ -227,12 +205,12 @@
 </script>
 <script>
     @if(Session::has('messege'))
-    var type="{{Session::get('alert-type','info')}}"
-    switch(type){
+    var type = "{{Session::get('alert-type','info')}}"
+    switch (type) {
         case 'info':
             $.notify({
                 message: "{{ Session::get('messege') }}"
-            },{
+            }, {
                 type: 'info',
                 timer: 2000,
                 placement: {
@@ -244,7 +222,7 @@
         case 'success':
             $.notify({
                 message: "{{ Session::get('messege') }}"
-            },{
+            }, {
                 type: 'success',
                 timer: 2000,
                 placement: {
@@ -256,7 +234,7 @@
         case 'warning':
             $.notify({
                 message: "{{ Session::get('messege') }}"
-            },{
+            }, {
                 type: 'warning',
                 timer: 2000,
                 placement: {
@@ -268,7 +246,7 @@
         case 'error':
             $.notify({
                 message: "{{ Session::get('messege') }}"
-            },{
+            }, {
                 type: 'danger',
                 timer: 2000,
                 placement: {
@@ -282,25 +260,25 @@
 </script>
 <script>
     @if ($errors->any())
-        @foreach ($errors->all() as $error)
+    @foreach ($errors->all() as $error)
 
-            $.notify({
-                message: "{{ $error }}"
-            },{
-                type: 'danger',
-                timer: 2000,
-                placement: {
-                    from: 'top',
-                    align: 'right'
-                }
-            });
-        @endforeach
+    $.notify({
+        message: "{{ $error }}"
+    }, {
+        type: 'danger',
+        timer: 2000,
+        placement: {
+            from: 'top',
+            align: 'right'
+        }
+    });
+    @endforeach
     @endif
 
 </script>
 <script>
 
-    $(document).on("click", "#delete", function(e){
+    $(document).on("click", "#delete", function (e) {
         e.preventDefault();
         var link = $(this).attr("href");
         Swal.fire({
@@ -317,6 +295,20 @@
             }
         })
 
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.blogDetails').summernote({
+            height: 300,
+        });
+    });
+</script>
+
+<script type="application/javascript">
+    $('input[type="file"]').change(function(e){
+        var fileName = e.target.files[0].name;
+        $('.custom-file-label').html(fileName);
     });
 </script>
 </body>

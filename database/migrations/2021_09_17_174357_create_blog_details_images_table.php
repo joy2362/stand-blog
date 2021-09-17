@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdminPermissionsTable extends Migration
+class CreateBlogDetailsImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateAdminPermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admin_permissions', function (Blueprint $table) {
+        Schema::create('blog_details_images', function (Blueprint $table) {
             $table->id();
-            $table->integer('name');
-            $table->boolean('category')->default('0');
-            $table->boolean('admin')->default('0')  ;
+            $table->integer('post_id');
+            $table->string('img');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateAdminPermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin_permissions');
+        Schema::dropIfExists('blog_details_images');
     }
 }

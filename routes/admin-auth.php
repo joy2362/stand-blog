@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\RegisterUserController;
 use App\Http\Controllers\Admin\VerifyEmailController;
 use App\Http\Controllers\Admin\categoryController;
 use App\Http\Controllers\Admin\adminController;
+use App\Http\Controllers\Admin\BlogController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function () {
@@ -46,6 +47,20 @@ Route::prefix('admin')->group(function () {
     Route::post('/access/add', [adminController::class, 'store'])->name('admin.register');
 
     Route::get('/access/delete/{id}', [adminController::class, 'destroy']);
+
+    //Blogs
+    Route::get('/blog', [BlogController::class, 'index'])->name('admin.blog');
+
+    Route::get('/blog/create', [BlogController::class, 'create']);
+    Route::post('/blog/add', [BlogController::class, 'store']);
+
+    Route::get('/blog/add/details/{id}', [BlogController::class, 'addDetails']);
+    Route::post('/blog/add/details/{id}', [BlogController::class, 'storeDetails']);
+
+    Route::get('/blog/edit/{id}', [BlogController::class, 'edit']);
+    Route::post('/blog/update/{id}', [BlogController::class, 'update']);
+
+    Route::get('/blog/delete/{id}', [BlogController::class, 'destroy']);
 
     //auth
 //    Route::get('/register', [RegisterUserController::class, 'create'])
