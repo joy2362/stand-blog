@@ -60,6 +60,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/blog/edit/{id}', [BlogController::class, 'edit']);
     Route::post('/blog/update/{id}', [BlogController::class, 'update']);
 
+    Route::get('/blog/edit/details/{id}', [BlogController::class, 'editDetails']);
+    Route::post('/blog/update/details/{id}', [BlogController::class, 'updateDetails']);
+
     Route::get('/blog/delete/{id}', [BlogController::class, 'destroy']);
 
     //auth

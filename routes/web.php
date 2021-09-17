@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use  App\Http\Controllers\frontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',function (){
-    return view ('frontend.index');
-})->name('index');
+Route::get('/',[frontendController::class,'index'])->name('index');
 
 Route::get('/about',function (){
     return view ('frontend.about');
