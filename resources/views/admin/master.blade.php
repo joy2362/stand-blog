@@ -297,11 +297,15 @@
 
     });
 </script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.blogDetails').summernote({
-            height: 300,
-        });
+<script>
+    $(function(){
+        'use strict';
+
+        // Summernote editor
+        $('#summernote').summernote({
+            height: 150,
+            tooltip: false
+        })
     });
 </script>
 

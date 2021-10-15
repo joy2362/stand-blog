@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBlogDetailsImagesTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateBlogDetailsImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('blog_details_images', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->integer('post_id');
-            $table->string('img');
+            $table->unsignedBigInteger('post_id');
+            $table->foreign('post_id')->references('id')->on('blog_posts')->onDelete('cascade');
+            $table->string('name');
+            $table->string('email');
+            $table->longText('comment');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateBlogDetailsImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blog_details_images');
+        Schema::dropIfExists('comments');
     }
 }

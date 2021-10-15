@@ -19,7 +19,6 @@
                                 @endforeach </label>
                             <br>
                             <input type="text" data-role="tagsinput" name="tags" class=" tags"  >
-
                         </div>
                         <div class="form-group mt-5">
                             <label>Category </label>
@@ -37,6 +36,7 @@
                             <label for="poster" class="custom-file-label">Poster</label>
                             <input class="custom-file-input" id="poster" type="file" name="poster" accept="image/*">
                         </div>
+
                         <button type="submit" class="btn btn-primary pull-right">Update</button>
                     </form>
                 </div>

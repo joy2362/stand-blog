@@ -17,7 +17,7 @@ class BlogPost extends Model
         'post_by',
         'tags',
         'details',
-        'is_active',
+        'is_active'
     ];
 
     public function user(){
@@ -26,5 +26,10 @@ class BlogPost extends Model
 
     public function categoryName(){
         return $this->hasOne(category::class,'id', 'category');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(comment::class,'post_id','id');
     }
 }

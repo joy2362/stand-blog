@@ -22,6 +22,7 @@ class CreateBlogPostsTable extends Migration
             $table->text('tags');
             $table->longText('details')->nullable();
             $table->boolean('is_active')->default('0');
+            $table->integer('total_comment')->default(0);
             $table->timestamps();
         });
     }

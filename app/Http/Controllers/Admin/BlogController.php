@@ -52,8 +52,8 @@ class BlogController extends Controller
         $blog ->tags = $request->tags;
         $blog ->poster = $poster_name;
         $blog->save();
-
         $blog->tag($tags);
+
         $notification=array(
             'messege'=>'Post added!',
             'alert-type'=>'success'
@@ -80,38 +80,41 @@ class BlogController extends Controller
         $validatedData = $request->validate([
             'details' => 'required',
         ]);
-        $details = $request->details;
 
-        $dom = new \DomDocument();
-
-        $dom->loadHtml($details, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
-        $images = $dom->getElementsByTagName('img');
-        foreach($images as $k => $img){
-            $data = $img->getAttribute('src');
-            list($type, $data) = explode(';', $data);
-            list(, $data)      = explode(',', $data);
-            $data = base64_decode($data);
-            $image_name= "/media/details/img" . Str::random(10).$k.'.png';
-
-            $path = public_path() . $image_name;
-
-            file_put_contents($path, $data);
-
-            $imgDetails = new BlogDetailsImage();
-            $imgDetails->post_id =$id;
-            $imgDetails->img = $image_name;
-            $imgDetails->save();
-
-            $img->removeAttribute('src');
-            $img->setAttribute('src', $image_name);
-        }
-
-        $details = $dom->saveHTML();
+        //summer note with image upload
+//        $details = $request->details;
+//
+//        $dom = new \DomDocument();
+//
+//        $dom->loadHtml($details, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+//
+//        $images = $dom->getElementsByTagName('img');
+//        foreach($images as $k => $img){
+//            $data = $img->getAttribute('src');
+//            list($type, $data) = explode(';', $data);
+//            list(, $data)      = explode(',', $data);
+//            $data = base64_decode($data);
+//            $image_name= "/media/details/img" . Str::random(10).$k.'.png';
+//
+//            $path = public_path() . $image_name;
+//
+//            file_put_contents($path, $data);
+//
+//            $imgDetails = new BlogDetailsImage();
+//            $imgDetails->post_id =$id;
+//            $imgDetails->img = $image_name;
+//            $imgDetails->save();
+//
+//            $img->removeAttribute('src');
+//            $img->setAttribute('src', $image_name);
+//        }
+//
+//        $details = $dom->saveHTML();
         $blog = BlogPost::where('id',$id)->first();
-        $blog ->details = $details;
+        $blog ->details = $request->details;
         $blog->is_active = 1;
         $blog ->save();
+
         $notification=array(
             'messege'=>'Post Details added!',
             'alert-type'=>'success'
@@ -124,14 +127,6 @@ class BlogController extends Controller
 
         $blog->untag();
         unlink($blog->poster);
-        if ($blog->is_active){
-           $details = BlogDetailsImage::where('post_id',$id)->get();
-           foreach($details as $row){
-               unlink( public_path() .$row->img);
-           }
-            $details = BlogDetailsImage::where('post_id',$id)->delete();
-        }
-
         $blog->delete();
         $notification=array(
             'messege'=>'Post Deleted!',
@@ -151,6 +146,7 @@ class BlogController extends Controller
       if (isset($request->title)){
           $blog->title =$request->title;
       }
+
     if (isset($request->tags)){
         $tags = explode(", ", $request['tags']);
         $blog->tags = $request->tags;
@@ -184,37 +180,38 @@ class BlogController extends Controller
 
         $blog = BlogPost::where('id',$id)->first();
 
-        $details = $request->details;
 
-        $dom = new \DomDocument();
+//--summer note with image upload--
+//        $details = $request->details;
+//        $dom = new \DomDocument();
+//
+//        $dom->loadHtml($details, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+//
+//        $images = $dom->getElementsByTagName('img');
+//        foreach($images as $k => $img){
+//            $data = $img->getAttribute('src');
+//            dd($data);
+//            //list($type, $data) = explode(';', $data);
+//            //list(, $data)      = explode(',', $data);
+//            $data = base64_decode($data);
+//            $image_name= "/media/details/img" . Str::random(10).$k.'.png';
+//
+//            $path = public_path() . $image_name;
+//
+//            file_put_contents($path, $data);
+//
+//            $imgDetails = new BlogDetailsImage();
+//            $imgDetails->post_id =$id;
+//            $imgDetails->img = $image_name;
+//            $imgDetails->save();
+//
+//            $img->removeAttribute('src');
+//            $img->setAttribute('src', $image_name);
+//        }
+//
+//        $details = $dom->saveHTML();
 
-        $dom->loadHtml($details, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
-        $images = $dom->getElementsByTagName('img');
-        foreach($images as $k => $img){
-            $data = $img->getAttribute('src');
-            dd($data);
-            //list($type, $data) = explode(';', $data);
-            //list(, $data)      = explode(',', $data);
-            $data = base64_decode($data);
-            $image_name= "/media/details/img" . Str::random(10).$k.'.png';
-
-            $path = public_path() . $image_name;
-
-            file_put_contents($path, $data);
-
-            $imgDetails = new BlogDetailsImage();
-            $imgDetails->post_id =$id;
-            $imgDetails->img = $image_name;
-            $imgDetails->save();
-
-            $img->removeAttribute('src');
-            $img->setAttribute('src', $image_name);
-        }
-
-        $details = $dom->saveHTML();
-
-        $blog->details = $details;
+        $blog->details = $request->details;
 
         $notification=array(
             'messege'=>'Post Edited!',

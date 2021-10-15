@@ -11,7 +11,7 @@
                         @csrf
                         <div class=" mt-5 mb-5">
                             <label>Description</label>
-                            <textarea class=" blogDetails" name="details"></textarea>
+                            <textarea id="summernote" name="details"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary pull-right">Save</button>
                     </form>

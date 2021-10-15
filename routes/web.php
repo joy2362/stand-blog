@@ -25,9 +25,9 @@ Route::get('/blog',function (){
 Route::get('/contact',function (){
     return view ('frontend.contact');
 });
-Route::get('/details',function (){
-    return view ('frontend.post-details');
-});
+Route::get('/post/{id}', [frontendController::class,'details']);
+Route::get('/post', [frontendController::class,'allPost']);
+Route::post('/comment/create/{id}', [frontendController::class,'commentCreate']);
 
 //Route::get('/', function () {
 //    return view('welcome');
