@@ -54,6 +54,8 @@ class frontendController extends Controller
     }
 
     public function allPost(){
-        
+        $posts = BlogPost::paginate(2);
+
+        return view('frontend.blog',compact(with(['posts'])));
     }
 }

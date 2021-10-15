@@ -19,9 +19,6 @@ Route::get('/about',function (){
     return view ('frontend.about');
 });
 
-Route::get('/blog',function (){
-    return view ('frontend.blog');
-});
 Route::get('/contact',function (){
     return view ('frontend.contact');
 });
