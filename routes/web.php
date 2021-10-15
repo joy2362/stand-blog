@@ -24,6 +24,10 @@ Route::get('/contact',function (){
 });
 Route::get('/post/{id}', [frontendController::class,'details']);
 Route::get('/post', [frontendController::class,'allPost']);
+Route::get('/category/{id}', [frontendController::class,'postByCategory']);
+Route::post('/search', [frontendController::class,'postBySearch']);
+Route::get('/tag/{name}', [frontendController::class,'postByTag']);
+
 Route::post('/comment/create/{id}', [frontendController::class,'commentCreate']);
 
 //Route::get('/', function () {

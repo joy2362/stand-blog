@@ -43,16 +43,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item  {{ (request()->is('/')) ? 'active' : '' }}">
                         <a class="nav-link" href="{{url('/')}}">Home
-                            <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="about.html">About Us</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="blog.html">Blog Entries</a>
+                    <li class="nav-item {{ (request()->is('post')) ? 'active' : '' }}">
+                        <a class="nav-link" href="{{url('/post')}}">All Blog Entries</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="post-details.html">Post Details</a>

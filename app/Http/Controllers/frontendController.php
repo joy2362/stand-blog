@@ -13,19 +13,14 @@ class frontendController extends Controller
 
         $blogs = BlogPost::latest()->skip(5)->take(6)->get();
         $sliders = BlogPost::latest()->skip(3)->take(6)->get();
-        $recentPosts = BlogPost::latest()->take(4)->get();
-        $category = category::all();
-        $tags = BlogPost::existingTags();
-        return view('frontend.index',compact(with(['category','tags','recentPosts','sliders','blogs'])));
+
+        return view('frontend.index',compact(with(['sliders','blogs'])));
     }
 
     public function details($id){
         $post = BlogPost::where('id',$id)->first();
-        $recentPosts = BlogPost::latest()->take(4)->get();
-        $category = category::all();
-        $tags = BlogPost::existingTags();
 
-        return view('frontend.post-details',compact(with(['post','tags','category','recentPosts'])));
+        return view('frontend.post-details',compact(with(['post'])));
     }
 
 
@@ -54,8 +49,29 @@ class frontendController extends Controller
     }
 
     public function allPost(){
-        $posts = BlogPost::paginate(2);
+        $posts = BlogPost::paginate(10);
 
         return view('frontend.blog',compact(with(['posts'])));
     }
+
+    public function postByCategory($id){
+        $posts = BlogPost::where('category',$id)->paginate(2);
+        $category = category::find($id);
+        return view('frontend.category',compact(with(['posts','category'])));
+    }
+
+    public function postBySearch(Request $request){
+        $search = $request->search;
+        $posts = BlogPost::where('title','like','%'.$search.'%')->paginate(2);
+        return view('frontend.search',compact(with(['posts','search'])));
+    }
+
+    public function postByTag($name){
+      $posts =   BlogPost::withAllTags([$name])->paginate(2);
+      return view('frontend.tags',compact(with(['posts','name'])));
+    }
+
+
+
+
 }
