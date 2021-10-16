@@ -15,15 +15,12 @@ use  App\Http\Controllers\frontendController;
 */
 Route::get('/',[frontendController::class,'index'])->name('index');
 
-Route::get('/about',function (){
-    return view ('frontend.about');
-});
+Route::get('/contact', [frontendController::class,'contact']);
+Route::get('/about-us', [frontendController::class,'about']);
 
-Route::get('/contact',function (){
-    return view ('frontend.contact');
-});
 Route::get('/post/{id}', [frontendController::class,'details']);
 Route::get('/post', [frontendController::class,'allPost']);
+
 Route::get('/category/{id}', [frontendController::class,'postByCategory']);
 Route::post('/search', [frontendController::class,'postBySearch']);
 Route::get('/tag/{name}', [frontendController::class,'postByTag']);

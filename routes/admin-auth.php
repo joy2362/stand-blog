@@ -25,6 +25,9 @@ Route::prefix('admin')->group(function () {
        return view('admin.panel.profile');
     })->middleware(['auth:admin'])->name('admin.profile');
 
+    Route::get('/setting',[adminController::class, 'settings'])->name('admin.setting');
+    Route::post('/setting/update',[adminController::class, 'updateSettings']);
+
 
 
 

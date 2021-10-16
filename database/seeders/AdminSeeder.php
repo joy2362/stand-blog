@@ -18,7 +18,7 @@ class AdminSeeder extends Seeder
     {
         $admin  = new Admin();
         $admin->name = 'Adbullah zahid';
-        $admin->email = 'abdullahzajidjoy@gmail.com';
+        $admin->email = 'abdullahzahidjoy@gmail.com';
         $admin->email_verified_at = now();
         $admin->password = Hash::make('1234');
         $admin->save();

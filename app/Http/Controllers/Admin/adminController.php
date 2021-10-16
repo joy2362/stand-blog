@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\AdminPermission;
+use App\Models\setting;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -78,12 +79,74 @@ class adminController extends Controller
             return Redirect()->back()->with($notification);
         }
 
-
-
         $notification=array(
             'messege'=>'Admin Delete Successfully!',
             'alert-type'=>'success'
         );
         return Redirect('/admin/access/all')->with($notification);
     }
+
+    public function settings(){
+        $name = setting::where("setting",'siteName')->first();
+        $email = setting::where("setting",'email')->first();
+        $phone = setting::where("setting",'phone')->first();
+        $facebook = setting::where("setting",'facebook')->first();
+        $twitter = setting::where("setting",'twitter')->first();
+        $linkedin = setting::where("setting",'linkedin')->first();
+        $youtube = setting::where("setting",'youtube')->first();
+        $address = setting::where("setting",'address')->first();
+        $about = setting::where("setting",'about')->first();
+
+        return view('admin.panel.setting' , compact(with(['name', 'email','phone','facebook'
+            ,'twitter','linkedin','youtube','address','about'])));
+    }
+
+    public function updateSettings(Request $request){
+        $request->validate([
+            'siteName' => ['required', ],
+            'email' => ['required'],
+            'phone' => ['required'],
+            'facebook' => ['required'],
+            'twitter' => ['required'],
+            'linkedin' => ['required'],
+            'youtube' => ['required'],
+            'address' => ['required'],
+            'about' => ['required'],
+        ]);
+        setting::where("setting",'siteName')->update([
+             'option' => $request->siteName ,
+            ]);
+        setting::where("setting",'email')->update([
+            'option' => $request->email ,
+        ]);
+        setting::where("setting",'phone')->update([
+            'option' =>$request->phone,
+        ]);
+        setting::where("setting",'facebook')->update([
+            'option' => $request->facebook,
+        ]);
+        setting::where("setting",'twitter')->update([
+            'option' => $request->twitter ,
+        ]);
+        setting::where("setting",'linkedin')->update([
+            'option' => $request->linkedin ,
+        ]);
+        setting::where("setting",'youtube')->update([
+            'option' => $request->youtube,
+        ]);
+        setting::where("setting",'address')->update([
+            'option' => $request->address ,
+        ]);
+        setting::where("setting",'about')->update([
+            'option' => $request->about ,
+        ]);
+
+        $notification=array(
+            'messege'=>'Site setting updated!',
+            'alert-type'=>'success'
+        );
+        return back()->with($notification);
+
+    }
+
 }

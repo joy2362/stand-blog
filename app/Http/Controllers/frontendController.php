@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BlogPost;
 use App\Models\category;
 use App\Models\comment;
+use App\Models\setting;
 use Illuminate\Http\Request;
 
 class frontendController extends Controller
@@ -69,6 +70,24 @@ class frontendController extends Controller
     public function postByTag($name){
       $posts =   BlogPost::withAllTags([$name])->paginate(2);
       return view('frontend.tags',compact(with(['posts','name'])));
+    }
+
+    public function contact(){
+        $email = setting::where("setting",'email')->first();
+        $phone = setting::where("setting",'phone')->first();
+        $address = setting::where("setting",'address')->first();
+        return view ('frontend.contact', compact(with(['email','phone','address'])));
+    }
+
+    public function about(){
+
+        $facebook = setting::where("setting",'facebook')->first();
+        $twitter = setting::where("setting",'twitter')->first();
+        $linkedin = setting::where("setting",'linkedin')->first();
+        $youtube = setting::where("setting",'youtube')->first();
+        $about = setting::where("setting",'about')->first();
+
+        return view ('frontend.about',compact(with(['facebook','twitter','youtube','linkedin','about'])));
     }
 
 

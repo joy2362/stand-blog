@@ -1,3 +1,12 @@
+@php
+
+    $name =  \App\Models\setting::where("setting",'siteName')->first();
+    $facebook = \App\Models\setting::where("setting",'facebook')->first();
+    $twitter = \App\Models\setting::where("setting",'twitter')->first();
+    $linkedin = \App\Models\setting::where("setting",'linkedin')->first();
+    $youtube = \App\Models\setting::where("setting",'youtube')->first();
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +18,7 @@
     <meta name="author" content="TemplateMo">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
 
-    <title>Stand Blog </title>
+    <title> {{$name->option ?? 'Stand Blog '}} </title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{asset('frontend/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -37,7 +46,7 @@
 <header class="">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="{{url('/')}}"><h2>Stand Blog<em>.</em></h2></a>
+            <a class="navbar-brand" href="{{url('/')}}"><h2>{{$name->option ?? 'Stand Blog '}}<em>.</em></h2></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -47,17 +56,14 @@
                         <a class="nav-link" href="{{url('/')}}">Home
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About Us</a>
+                    <li class="nav-item {{ (request()->is('about-us')) ? 'active' : '' }}">
+                        <a class="nav-link"  href="{{url('/about-us')}}">About Us</a>
                     </li>
                     <li class="nav-item {{ (request()->is('post')) ? 'active' : '' }}">
-                        <a class="nav-link" href="{{url('/post')}}">All Blog Entries</a>
+                        <a class="nav-link" href="{{url('/post')}}">Blog Entries</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="post-details.html">Post Details</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    <li class="nav-item {{ (request()->is('contact')) ? 'active' : '' }}">
+                        <a class="nav-link" href="{{url('/contact')}}">Contact Us</a>
                     </li>
                 </ul>
             </div>
@@ -73,18 +79,16 @@
         <div class="row">
             <div class="col-lg-12">
                 <ul class="social-icons">
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Behance</a></li>
-                    <li><a href="#">Linkedin</a></li>
-                    <li><a href="#">Dribbble</a></li>
+                    <li><a href="{{$facebook->option ?? '#'}}">Facebook</a></li>
+                    <li><a href="{{$twitter->option ?? '#'}}">Twitter</a></li>
+                    <li><a href="{{$linkedin->option ?? '#'}}">Linkedin</a></li>
+                    <li><a href="{{$youtube->option ?? '#'}}">Youtube</a></li>
                 </ul>
             </div>
             <div class="col-lg-12">
                 <div class="copyright-text">
-                    <p>Copyright 2020 Stand Blog Co.
-
-                        | Design: <a rel="nofollow" href="https://templatemo.com" target="_parent">TemplateMo</a></p>
+                    <p>Copyright 2021 {{$name->option ?? 'Stand Blog '}}
+                        | Developed by Abdullah Zahid</p>
                 </div>
             </div>
         </div>
